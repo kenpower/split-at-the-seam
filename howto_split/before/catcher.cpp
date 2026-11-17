@@ -3,6 +3,7 @@
 // A caught fruit scores a point, a missed fruit costs a life. Space restarts after game over.
 //
 // Everything is mixed together: game rules, SFML shapes, keyboard, clock and rand().
+// The game is one function, catcher(), called from main() - the same shape as the games in the project.
 // None of the rules can be unit tested, because they only exist inside this loop.
 //
 // SEAM MAP: each line that matters is tagged with what it depends on.
@@ -17,7 +18,8 @@
 #include <string>                                                           // [DRAW] std::to_string for the window title
 using namespace sf;                                                         // [KEY+TIME+DRAW] hides which names are SFML's
 
-int main()
+// The whole game. It returns when the window is closed.
+int catcher()
 {
     srand(time(0));                                                         // [RAND]
 
@@ -83,4 +85,10 @@ int main()
     }
 
     return 0;
+}
+
+// main() only starts the game, like the launcher menu does in the project's games.
+int main()
+{
+    return catcher();
 }

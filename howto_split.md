@@ -47,8 +47,8 @@ Try writing one test for [before/catcher.cpp](howto_split/before/catcher.cpp). T
 
 | To test it you need to... | But in the before version... |
 |------------------|------------------------------|
-| **Call the rule** | There's nothing to call. The rule is a few lines in the middle of `main()`'s `while` loop. Calling `main()` opens a window and loops until a person closes it. You can't run "one frame". |
-| **Set up the situation** (fruit just above the bottom, 3 lives) | `lives` and `score` are local variables inside `main()`, so nothing outside can set them. The fruit's position isn't even a variable: it lives inside an SFML `CircleShape`. |
+| **Call the rule** | There's nothing to call. The rule is a few lines in the middle of `catcher()`'s `while` loop. Calling `catcher()` opens a window and loops until a person closes it. You can't run "one frame". |
+| **Set up the situation** (fruit just above the bottom, 3 lives) | `lives` and `score` are local variables inside `catcher()`, so nothing outside can set them. The fruit's position isn't even a variable: it lives inside an SFML `CircleShape`. |
 | **Control the input** (no keys pressed) | The code asks the real keyboard (`Keyboard::isKeyPressed`). A test can't press or release keys. |
 | **Control time** | `dt` comes from a real `Clock`, so how far the fruit falls in one frame depends on how fast the computer is. Run it twice and you get different numbers. |
 | **Predict what happens next** | After a catch or miss, the fruit moves to `rand() % 380`. The test can't know where it will be, so it can't check it. |

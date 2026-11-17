@@ -18,7 +18,8 @@ const float FRUIT_SIZE = 20;
 const float FRUIT_START_SPEED = 100, FRUIT_SPEED_PER_POINT = 10;
 const int START_LIVES = 3;
 
-int main()
+// The whole game. It returns when the window is closed.
+int catcher()
 {
     srand(time(0));                                                         // [RAND]
 
@@ -94,4 +95,10 @@ int main()
     }
 
     return 0;
+}
+
+// main() only starts the game, like the launcher menu does in the project's games.
+int main()
+{
+    return catcher();
 }

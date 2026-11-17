@@ -16,7 +16,7 @@ A unit test needs to do three things:
 2. **Act** – run a small, bounded piece of behaviour.
 3. **Assert** – read back the result.
 
-A typical game loop blocks all three. You can't put it in a known state (state is local to `main()` or hidden inside sprites), you can't run "one frame" (the loop runs until a human closes the window), and you can't read the result (it only appears as pixels). On top of that, the outcome depends on things the test can't control: what keys are held, how fast the machine is, and what `rand()` returns.
+A typical game loop blocks all three. You can't put it in a known state (state is local to the game's function or hidden inside sprites), you can't run "one frame" (the loop runs until a human closes the window), and you can't read the result (it only appears as pixels). On top of that, the outcome depends on things the test can't control: what keys are held, how fast the machine is, and what `rand()` returns.
 
 ---
 
@@ -202,10 +202,10 @@ The function body can't tell whether it is being played or tested. That is exact
 
 You've tested functions. An app or game feels different, because:
 
-- It **never returns**. `main()` loops until a person closes the window. A test can't call it and wait for an answer.
+- It **never returns**. The game's function (`catcher()`, or `tetris()` in the project) loops until a person closes the window. A test can't call it and wait for an answer.
 - It reads **hidden inputs on every frame**: keys, time, `rand()`.
 - Its results go to **hidden outputs**: the screen.
-- Its state lives in **local variables in `main()`** or inside sprites, where no test can reach it.
+- Its state lives in **local variables in the game's function** or inside sprites, where no test can reach it.
 
 But look at what a game loop *really* is – the same small step, repeated 60 times a second:
 
@@ -223,7 +223,7 @@ So testing a game means testing **one step**. We want a function that says:
 That function is `update`, and the whole of the split is about building it:
 
 - every hidden input becomes a **parameter** (a seam),
-- the state moves out of `main()` into a **class**, so a test can create one,
+- the state moves out of the game's function into a **class**, so a test can create one,
 - and every hidden output becomes a **getter**, so a test can read the result instead of looking at the screen.
 
 Then the game and the test use the **same** class in different ways:
@@ -423,7 +423,7 @@ Lines with **two or more labels** are where the tangle is. The split is just unt
 
 List every variable the rules read or write. For each one ask: *where does it live?*
 
-- In a local in `main()`? → becomes a member of the core.
+- In a local in the game's function? → becomes a member of the core.
 - In a global array? → becomes a member (or a parameter).
 - **Inside an SFML object** (`sprite.getPosition()`, `shape.move()`)? → this is the most important one to fix first. Give it its own plain variable; set the sprite's position from it only when drawing.
 

@@ -16,7 +16,8 @@ float randomFruitX()
     return float(rand() % int(CatcherGame::WIDTH - CatcherGame::FRUIT_SIZE));
 }
 
-int main()
+// The whole game. It returns when the window is closed.
+int catcher()
 {
     srand(time(0));
 
@@ -70,4 +71,10 @@ int main()
     }
 
     return 0;
+}
+
+// main() only starts the game, like the launcher menu does in the project's games.
+int main()
+{
+    return catcher();
 }

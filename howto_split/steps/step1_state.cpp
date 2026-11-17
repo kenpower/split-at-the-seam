@@ -12,7 +12,8 @@
 #include <string>
 using namespace sf;
 
-int main()
+// The whole game. It returns when the window is closed.
+int catcher()
 {
     srand(time(0));                                                         // [RAND]
 
@@ -85,4 +86,10 @@ int main()
     }
 
     return 0;
+}
+
+// main() only starts the game, like the launcher menu does in the project's games.
+int main()
+{
+    return catcher();
 }
