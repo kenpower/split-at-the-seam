@@ -1,10 +1,10 @@
 # How to split game logic from SFML (so you can test it)
 
-Most of the games in the [16_SFML_Games](https://github.com/kenpower/16_SFML_Games) project do everything inside one loop: read the keyboard, move things, apply the rules, and draw. The **rules** (what happens when the ball hits a block, when a row is full, when a fruit is caught) are the part worth testing, but you can't test them while they are trapped inside a loop that needs a window.
+Most of the games in the [sfml-refactor-lab](https://github.com/kenpower/sfml-refactor-lab) project do everything inside one loop: read the keyboard, move things, apply the rules, and draw. The **rules** (what happens when the ball hits a block, when a row is full, when a fruit is caught) are the part worth testing, but you can't test them while they are trapped inside a loop that needs a window.
 
 This guide walks through splitting a small game, one safe step at a time, until the rules live in their own class with no SFML. Then it shows how to test that class.
 
-The example game is **Catcher**: move a basket left and right to catch falling fruit. A catch scores a point, a miss costs a life, and after three misses it's game over. It accompanies the [16_SFML_Games](https://github.com/kenpower/16_SFML_Games) project but is *not* one of its 16 games, so you can copy the method but not the answer.
+The example game is **Catcher**: move a basket left and right to catch falling fruit. A catch scores a point, a miss costs a life, and after three misses it's game over. It accompanies the [sfml-refactor-lab](https://github.com/kenpower/sfml-refactor-lab) project but is *not* one of its games, so you can copy the method but not the answer.
 
 | File | What it is |
 |------|------------|
@@ -402,7 +402,7 @@ See the finished class in [CatcherGame.h](howto_split/after/CatcherGame.h) and t
 
 ### Step 8 – Make it compile in the test project
 
-In your own game's repository (for the [16_SFML_Games](https://github.com/kenpower/16_SFML_Games) project), put your header in the `16_SFML_Games/` folder. Its `Tests` target can already see that folder. In `Tests/test.cpp`:
+In your own game's repository (for the [sfml-refactor-lab](https://github.com/kenpower/sfml-refactor-lab) project), your class goes in the header that is already provided in the `16_SFML_Games/` folder (e.g. `TetrisBoard.h`), and your game's test file (e.g. `Tests/tetris_test.cpp`) already includes it. The `Tests` target can see that folder. For Catcher, the equivalent would be:
 
 ```cpp
 #include "CatcherGame.h"
@@ -474,7 +474,7 @@ For every rule, ask: **what goes in, and what should come out?**
 
 ## Traps you will meet in the real games
 
-These are the things that make splitting harder in the 16_SFML_Games games. Look for them in Step 0.
+These are the things that make splitting harder in the sfml-refactor-lab games. Look for them in Step 0.
 
 - **State stored in SFML objects.** If the code calls `getPosition()` on a sprite to make a decision, the state is living in the sprite. Fix it first (Step 1).
 - **Sizes that come from images.** `getGlobalBounds()` on a sprite uses the image's size. Find the number and name it.

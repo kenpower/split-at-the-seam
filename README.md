@@ -7,7 +7,7 @@ This repository holds:
 - lecture notes on *seams* (places where you can change what a program does without editing it), and
 - **Catcher**, a small worked example: a basket catches falling fruit. It is shown before the split, after the split, and in six small steps in between, plus unit tests for the rules.
 
-It accompanies the [16_SFML_Games](https://github.com/kenpower/16_SFML_Games) project. Catcher is not one of those 16 games, so you can copy the method but not the answer.
+It accompanies the [sfml-refactor-lab](https://github.com/kenpower/sfml-refactor-lab) project. Catcher is not one of that project's games, so you can copy the method but not the answer.
 
 ## Start here
 
