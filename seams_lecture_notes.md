@@ -1,6 +1,6 @@
 # Lecture notes: Seams, and splitting a small app so it can be tested
 
-These notes cover the ideas behind [howto_split.md](https://github.com/kenpower/split-at-the-seam/blob/main/howto_split.md). That guide is the step-by-step recipe for one game (Catcher). These notes are the *why* and the general method, so you can apply it to any small interactive program, including the games in the [sfml-refactor-lab](https://github.com/kenpower/sfml-refactor-lab) project that these notes accompany.
+These notes cover the ideas behind [howto_split.md](https://github.com/kenpower/split-at-the-seam/blob/main/howto_split.md). That guide is the step-by-step recipe for one game (Catcher). These notes are the *why* and the general method, so you can apply it to any small interactive program, including the games in the [SFML_Game_Refactor_Test_Worksheet](https://github.com/kenpower/SFML_Game_Refactor_Test_Worksheet) project that these notes accompany.
 
 Running example throughout: **Catcher** ([before](howto_split/before/catcher.cpp), [after](howto_split/after/catcher.cpp), [CatcherGame.h](howto_split/after/CatcherGame.h), [tests](howto_split/after/CatcherGame_test.cpp)).
 
@@ -71,7 +71,7 @@ TEST(Fruit, NewFruitX)
 
 There are no parameters, yet the answer changes every time. The function is getting an input from somewhere *other* than its parameter list: from `rand()`. That is a **hidden input** – a back door the test can't stand at.
 
-Games are full of back doors. Here are three more, all written in the style of the games in the [sfml-refactor-lab](https://github.com/kenpower/sfml-refactor-lab) project:
+Games are full of back doors. Here are three more, all written in the style of the games in the [SFML_Game_Refactor_Test_Worksheet](https://github.com/kenpower/SFML_Game_Refactor_Test_Worksheet) project:
 
 ```cpp
 // Hidden input: the real keyboard
@@ -533,7 +533,7 @@ After every step: build, play through a short **manual test script**, commit. Th
 
 1. In Catcher, `randomFruitX()` is called every frame, even when no fruit is needed. Does this change how the game *plays*? Does it change the *sequence* of fruit positions compared with the original? Why is that acceptable here?
 2. Redesign Catcher's seam using the "ask for it when needed" option (`needsNewFruit()` / `spawnFruit(x)`). What gets better? What gets worse?
-3. Pick one of the games in [sfml-refactor-lab](https://github.com/kenpower/sfml-refactor-lab). Label ten lines of its loop with RULE / KEY / TIME / RAND / DRAW. Which lines have more than one label?
+3. Pick one of the games in [SFML_Game_Refactor_Test_Worksheet](https://github.com/kenpower/SFML_Game_Refactor_Test_Worksheet). Label ten lines of its loop with RULE / KEY / TIME / RAND / DRAW. Which lines have more than one label?
 4. For the same game, write the "what goes in / what comes out" lists. Sketch the `update` signature and the getters.
 5. Find a place in any game where state lives inside a sprite. What plain variable would replace it?
 6. Suppose the shell needs to play a sound when a fruit is caught. Change `CatcherGame` so the shell can find out, without the core including any audio headers.
