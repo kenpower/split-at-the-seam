@@ -9,12 +9,13 @@
 //   [RULE] game logic   [KEY] keyboard/mouse   [TIME] clock   [RAND] rand()   [DRAW] SFML shapes/window
 // A tag with more than one label (e.g. [RULE+DRAW]) is a tangle: a line that has to be split
 // before the rules can move into their own class. As you refactor, the tangles disappear.
+// Lines with no tag (braces, main, return) are just structure.
 
-#include <SFML/Graphics.hpp>
-#include <cstdlib>
-#include <ctime>
-#include <string>
-using namespace sf;
+#include <SFML/Graphics.hpp>                                                // [KEY+TIME+DRAW] window, keyboard, clock and shapes all come from here
+#include <cstdlib>                                                          // [RAND] rand() and srand()
+#include <ctime>                                                            // [RAND] time(0), only used to seed rand()
+#include <string>                                                           // [DRAW] std::to_string for the window title
+using namespace sf;                                                         // [KEY+TIME+DRAW] hides which names are SFML's
 
 int main()
 {
@@ -34,16 +35,16 @@ int main()
     int score = 0, lives = 3;                                               // [RULE]
     Clock clock;                                                            // [TIME]
 
-    while (window.isOpen())
+    while (window.isOpen())                                                 // [DRAW] the game runs as long as the window is open
     {
         float dt = clock.restart().asSeconds();                             // [TIME]
 
-        while (const std::optional e = window.pollEvent())
+        while (const std::optional e = window.pollEvent())                  // [KEY] events come from the window
         {
             if (e->is<Event::Closed>())                                     // [KEY]
                 window.close();                                             // [DRAW]
 
-            if (const auto* key = e->getIf<Event::KeyPressed>())
+            if (const auto* key = e->getIf<Event::KeyPressed>())            // [KEY]
                 if (key->code == Keyboard::Key::Space && lives == 0)        // [KEY+RULE]
                 {
                     score = 0;                                              // [RULE]
