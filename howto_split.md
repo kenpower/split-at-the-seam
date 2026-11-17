@@ -31,6 +31,8 @@ build/bin/catcher_before      # Windows: build\bin\Release\catcher_before.exe
 build/bin/catcher_after
 ```
 
+Or build and run one in a single command: `cmake --build build --config Release --target run_before` (or `run_after`).
+
 In Visual Studio or VS Code (CMake Tools), pick `catcher_before` or `catcher_after` as the startup / launch target instead.
 
 **Controls:** Left and Right arrows move the basket. Space restarts after game over. The score and lives are shown in the window title.

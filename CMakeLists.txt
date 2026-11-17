@@ -165,6 +165,19 @@ if(WIN32 AND SFML_FOUND AND NOT SFML_STATIC_LIBRARIES)
         COMMAND_EXPAND_LISTS
     )
 endif()
+
+# Build and play a version with one command:
+#   cmake --build build --target run_before
+#   cmake --build build --target run_after
+foreach(version before after)
+    add_custom_target(run_${version}
+        COMMAND $<TARGET_FILE:catcher_${version}>
+        DEPENDS catcher_${version}
+        WORKING_DIRECTORY $<TARGET_FILE_DIR:catcher_${version}>
+        USES_TERMINAL
+        COMMENT "Running Catcher (${version} the split) - close the window to finish"
+    )
+endforeach()
 endif() # CATCHER_BUILD_GAMES
 
 # ---------------------------------------------------------------------------

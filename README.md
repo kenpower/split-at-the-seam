@@ -39,6 +39,15 @@ cmake --workflow --preset default
 
 This configures, builds and runs the tests (Release, in `build/`). The programs are in `build/bin/`. Use `--preset debug` for a Debug build in `build-debug/`.
 
+To build and play the version before or after the split in one command:
+
+```sh
+cmake --build build --config Release --target run_before
+cmake --build build --config Release --target run_after
+```
+
+Close the window to finish.
+
 To build only the tests (no SFML needed): `cmake -S . -B build -DCATCHER_BUILD_GAMES=OFF`, then `cmake --build build` and `ctest --test-dir build --output-on-failure`.
 
 ## Controls
